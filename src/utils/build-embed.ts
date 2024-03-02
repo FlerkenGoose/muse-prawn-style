@@ -7,6 +7,8 @@ import {truncate} from './string.js';
 
 const PAGE_SIZE = 10;
 
+const prawnBannerUrl = 'https://i.imgur.com/YzaMA90.jpeg';
+
 const getMaxSongTitleLength = (title: string) => {
   // eslint-disable-next-line no-control-regex
   const nonASCII = /[^\x00-\x7F]+/;
@@ -67,6 +69,7 @@ export const buildPlayingMessageEmbed = (player: Player): EmbedBuilder => {
       Requested by: <@${requestedBy}>\n
       ${getPlayerUI(player)}
     `)
+    .setImage(prawnBannerUrl)
     .setFooter({text: `Source: ${artist}`});
 
   if (thumbnailUrl) {
@@ -125,6 +128,7 @@ export const buildQueueEmbed = (player: Player, page: number): EmbedBuilder => {
     .addFields([{name: 'In queue', value: getQueueInfo(player), inline: true}, {
       name: 'Total length', value: `${totalLength > 0 ? prettyTime(totalLength) : '-'}`, inline: true,
     }, {name: 'Page', value: `${page} out of ${maxQueuePage}`, inline: true}])
+    .setImage(prawnBannerUrl)
     .setFooter({text: `Source: ${artist} ${playlistTitle}`});
 
   if (thumbnailUrl) {
